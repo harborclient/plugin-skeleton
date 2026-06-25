@@ -9,8 +9,11 @@ importers:
   .:
     devDependencies:
       '@harborclient/plugin-api':
-        specifier: file:../harborclient/packages/plugin-api
-        version: file:../harborclient/packages/plugin-api
+        specifier: ^0.4.0
+        version: 0.4.1(react@19.2.7)
+      '@types/node':
+        specifier: ^26.0.1
+        version: 26.0.1
       '@types/react':
         specifier: ^19.1.8
         version: 19.2.17
@@ -179,8 +182,14 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@harborclient/plugin-api@file:../harborclient/packages/plugin-api':
-    resolution: {directory: ../harborclient/packages/plugin-api, type: directory}
+  '@harborclient/plugin-api@0.4.1':
+    resolution: {integrity: sha512-gD9nFiA8I/QMNsdeOac22wtiK1pJgEjx6QiNjO0gWOmDDt4pPGajT+A8pUumjYP+CPaip4QmMhw64tfBJ1CyZw==}
+    hasBin: true
+    peerDependencies:
+      react: '>=18'
+
+  '@types/node@26.0.1':
+    resolution: {integrity: sha512-fc3KiUoBt6kie0N9bIW3E47vZsuaMf0PM2AaUpLCLT0s/LvX1nxAim6Fc049cNxODPpGm6qRAuUOB86SkRuPQw==}
 
   '@types/react@19.2.17':
     resolution: {integrity: sha512-MXfmqaVPEVgkBT/aY0aGCkRWWtByiYQXo3xdQ8r5RzuFrPiRn8Gar2tQdXSUQ2GKV3bkXckek89V8wQBY2Q/Aw==}
@@ -193,10 +202,17 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
+  react@19.2.7:
+    resolution: {integrity: sha512-HNe9WslTbXmFK8o8cmwgAeJFSBvt1bPdHCVKtaaV+WlAN36mpT4hcRpwbf3fY56ar2oIXzsBpOAiIRHAdY0OlQ==}
+    engines: {node: '>=0.10.0'}
+
   typescript@5.9.3:
     resolution: {integrity: sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==}
     engines: {node: '>=14.17'}
     hasBin: true
+
+  undici-types@8.3.0:
+    resolution: {integrity: sha512-j375ScV60dom+YkPFIfTLcOiPxkN/buHz5GobjLhixFuANaNs3C9l4GmrWqejgXWJ7BbJcFYpTEUkS1Ge8bpZQ==}
 
 snapshots:
 
@@ -278,7 +294,13 @@ snapshots:
   '@esbuild/win32-x64@0.25.12':
     optional: true
 
-  '@harborclient/plugin-api@file:../harborclient/packages/plugin-api': {}
+  '@harborclient/plugin-api@0.4.1(react@19.2.7)':
+    dependencies:
+      react: 19.2.7
+
+  '@types/node@26.0.1':
+    dependencies:
+      undici-types: 8.3.0
 
   '@types/react@19.2.17':
     dependencies:
@@ -315,4 +337,8 @@ snapshots:
       '@esbuild/win32-ia32': 0.25.12
       '@esbuild/win32-x64': 0.25.12
 
+  react@19.2.7: {}
+
   typescript@5.9.3: {}
+
+  undici-types@8.3.0: {}

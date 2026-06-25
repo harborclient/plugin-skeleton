@@ -18,7 +18,18 @@ pnpm build
 
 Load the project folder in HarborClient via **Settings → Plugins → Load unpacked…**.
 
-Requires `@harborclient/plugin-api@^0.2.0` from npm.
+Requires `@harborclient/plugin-api@^0.4.0` from npm.
+
+## Sign and verify
+
+After building entry files, sign the plugin directory (this repository root) with an Ed25519 key:
+
+```bash
+pnpm plugin:sign -- --dir . --private-key /path/to/signing.pem --key-id my-publisher
+pnpm plugin:verify -- --dir . --public-key /path/to/public.key
+```
+
+See the [@harborclient/plugin-api signing docs](https://harborclient.github.io/plugin-api/signing) for key generation and `signature.json` format.
 
 ## Local plugin-api development
 

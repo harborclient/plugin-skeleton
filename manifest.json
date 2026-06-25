@@ -2,7 +2,7 @@
   "id": "com.example.skeleton",
   "name": "Plugin Skeleton",
   "version": "1.0.0",
-  "company": "Example Inc.",
+  "author": "Example Inc.",
   "description": "README.md",
   "engines": {
     "harborclient": ">=1.8.0"

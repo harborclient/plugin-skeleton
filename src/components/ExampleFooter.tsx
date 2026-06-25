@@ -1,4 +1,4 @@
-import { useCallback, useState } from "@harborclient/plugin-api/react";
+import { useCallback, useState } from "@harborclient/sdk/react";
 
 /**
  * Example footer panel with local state following the host layout contract.

@@ -4,7 +4,7 @@ Starter template for HarborClient plugins with renderer UI (JSX) and a main-proc
 
 ## Features
 
-- Official JSX runtime via `@harborclient/plugin-api` (`installReact`, hook barrel)
+- Official JSX runtime via `@harborclient/sdk` (`installReact`, hook barrel)
 - Settings section with persistent storage
 - Footer panel following the host layout contract
 - Main entry logging `onAfterSend` exchanges
@@ -18,7 +18,7 @@ pnpm build
 
 Load the project folder in HarborClient via **Settings → Plugins → Load unpacked…**.
 
-Requires `@harborclient/plugin-api@^0.4.0` from npm.
+Requires `@harborclient/sdk@^0.4.0` from npm.
 
 ## Sign and verify
 
@@ -29,13 +29,13 @@ pnpm plugin:sign -- --dir . --private-key /path/to/signing.pem --key-id my-publi
 pnpm plugin:verify -- --dir . --public-key /path/to/public.key
 ```
 
-See the [@harborclient/plugin-api signing docs](https://harborclient.github.io/plugin-api/signing) for key generation and `signature.json` format.
+See the [@harborclient/sdk signing docs](https://harborclient.github.io/sdk/signing) for key generation and `signature.json` format.
 
-## Local plugin-api development
+## Local SDK development
 
-Do not commit `file:` paths in `package.json`. To test against a local `@harborclient/plugin-api` checkout without changing tracked files, use one of:
+Do not commit `file:` paths in `package.json`. To test against a local `@harborclient/sdk` checkout without changing tracked files, use one of:
 
-- `pnpm link` from the published package directory after `pnpm pack` in `packages/plugin-api`
+- `pnpm link` from the published package directory after `pnpm pack` in `packages/sdk`
 - A gitignored override file (for example `.pnpmfile.cjs` or a local-only `pnpm-workspace.yaml` entry) that only exists on your machine
 
 ## Development

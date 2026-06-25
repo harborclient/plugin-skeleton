@@ -1,5 +1,5 @@
-import { installReact } from "@harborclient/plugin-api";
-import type { PluginContext } from "@harborclient/plugin-api";
+import { installReact } from "@harborclient/sdk";
+import type { PluginContext } from "@harborclient/sdk";
 import { ExampleFooter } from "./components/ExampleFooter";
 import { SettingsPanel } from "./components/SettingsPanel";
 

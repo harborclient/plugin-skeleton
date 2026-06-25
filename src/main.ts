@@ -2,7 +2,7 @@ import type {
   MainPluginContext,
   PluginHttpRequest,
   PluginHttpResponse,
-} from "@harborclient/plugin-api/main";
+} from "@harborclient/sdk/main";
 
 /**
  * Activates the main-process half: logs completed HTTP exchanges to the terminal.

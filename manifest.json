@@ -1,11 +1,11 @@
 {
   "id": "com.example.skeleton",
   "name": "Plugin Skeleton",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "company": "Example Inc.",
   "description": "README.md",
   "engines": {
-    "harborclient": ">=1.9.0"
+    "harborclient": ">=1.8.0"
   },
   "renderer": "dist/renderer.js",
   "main": "dist/main.js",

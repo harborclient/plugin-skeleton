@@ -10,6 +10,7 @@
     "dev:main": "esbuild src/main.ts --bundle --outfile=dist/main.js --format=esm --platform=neutral --watch",
     "dev:renderer": "esbuild src/renderer.tsx --bundle --outfile=dist/renderer.js --format=esm --jsx=automatic --jsx-import-source=@harborclient/sdk --external:react --external:react-dom --watch",
     "typecheck": "tsc --noEmit",
+    "screenshot": "bash scripts/render-screenshot.sh",
     "pack": "pnpm build && zip -r skeleton.hcp manifest.json README.md dist",
     "plugin:sign": "node --experimental-strip-types scripts/plugin-sign.ts",
     "plugin:verify": "node --experimental-strip-types scripts/plugin-verify.ts"

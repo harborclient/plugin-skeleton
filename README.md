@@ -51,3 +51,43 @@ Rebuilds `dist/renderer.js` and `dist/main.js` on change. Keep a contributed UI 
 1. Change `id`, `name`, and `contributes` in `manifest.json`.
 2. Replace example components under `src/components/`.
 3. Adjust permissions to match your plugin's needs.
+
+## Marketing screenshot
+
+Generate a 1280×720 PNG for plugin listings or README hero images. The output is written to `screenshot.png` at the repository root.
+
+### Prerequisites
+
+Install [Firefox](https://www.mozilla.org/firefox/). The render script uses headless Firefox because it captures the full 1280×720 frame reliably; Chrome headless clips the bottom of this layout.
+
+### Customize the template
+
+Edit [`scripts/screenshot-marketing.html`](scripts/screenshot-marketing.html) before rendering:
+
+| Region         | Selector                 | Purpose                                                                |
+| -------------- | ------------------------ | ---------------------------------------------------------------------- |
+| Category badge | `.plugin-badge`          | Label above the headline (default: "HarborClient Plugin")              |
+| Feature pills  | `.badge-row .pill`       | Highlight bullets; add or remove `<span class="pill">` elements        |
+| Headline       | `h1` / `h1 span`         | Main title; the gradient accent is on the `<span>`                     |
+| Description    | `.subtitle`              | One-line value proposition                                             |
+| Window title   | `.toolbar-title`         | Mock HarborClient window chrome                                        |
+| UI preview     | `.plugin-panel`          | Main mockup body (default: settings panel with plugin id and checkbox) |
+| Success toast  | `.toast` / `.toast-text` | Optional banner; delete the entire `.toast` block to hide it           |
+
+The default mockup mirrors this skeleton's settings panel. If your plugin contributes request tabs or a footer panel instead, replace the `.plugin-panel` HTML with markup that matches your UI.
+
+Preview the layout by opening the HTML file in a browser at 1280×720 before rendering.
+
+### Generate
+
+```bash
+pnpm screenshot
+```
+
+Or run the script directly:
+
+```bash
+./scripts/render-screenshot.sh
+```
+
+On success you should see: `Wrote screenshot.png (1280x720)`.

@@ -2,6 +2,9 @@
 
 Starter template for HarborClient plugins with renderer UI (JSX) and a main-process HTTP hook.
 
+![Screenshot](screenshot.png)
+
+
 ## Features
 
 - Official JSX runtime via `@harborclient/sdk` (`installReact`, hook barrel)

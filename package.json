@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "build": "pnpm build:main && pnpm build:renderer",
+    "build": "pnpm build:main && node scripts/build.mjs",
     "build:main": "esbuild src/main.ts --bundle --outfile=dist/main.js --format=esm --platform=neutral",
-    "build:renderer": "esbuild src/renderer.tsx --bundle --outfile=dist/renderer.js --format=esm --jsx=automatic --jsx-import-source=@harborclient/sdk --external:react --external:react-dom",
-    "dev": "pnpm dev:main & pnpm dev:renderer",
+    "build:renderer": "node scripts/build.mjs",
+    "dev": "pnpm dev:main & node scripts/build.mjs --watch",
     "dev:main": "esbuild src/main.ts --bundle --outfile=dist/main.js --format=esm --platform=neutral --watch",
-    "dev:renderer": "esbuild src/renderer.tsx --bundle --outfile=dist/renderer.js --format=esm --jsx=automatic --jsx-import-source=@harborclient/sdk --external:react --external:react-dom --watch",
+    "dev:renderer": "node scripts/build.mjs --watch",
     "typecheck": "tsc --noEmit",
     "screenshot": "bash scripts/render-screenshot.sh",
     "pack": "pnpm build && zip -r skeleton.hcp manifest.json README.md dist",
@@ -16,7 +16,7 @@
     "plugin:verify": "node --experimental-strip-types scripts/plugin-verify.ts"
   },
   "dependencies": {
-    "@harborclient/sdk": "^0.6.16"
+    "@harborclient/sdk": "^1.0.0"
   },
   "devDependencies": {
     "@types/node": "^26.0.1",

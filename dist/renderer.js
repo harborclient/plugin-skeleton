@@ -1,9 +1,26 @@
-// node_modules/.pnpm/@harborclient+sdk@0.4.3_react@19.2.7/node_modules/@harborclient/sdk/dist/runtime/reactHost.js
+// ../harborclient-sdk/dist/runtime/reactHost.js
+var HOST_REACT_GLOBAL_KEY = "__HARBORCLIENT_HOST_REACT__";
 var hostReact = null;
+function readGlobalHostReact() {
+  if (typeof globalThis === "undefined") {
+    return null;
+  }
+  const candidate = globalThis[HOST_REACT_GLOBAL_KEY];
+  return candidate ?? null;
+}
 function setHostReact(react) {
   hostReact = react;
+  if (typeof globalThis !== "undefined") {
+    globalThis[HOST_REACT_GLOBAL_KEY] = react;
+  }
 }
 function requireHostReact() {
+  if (hostReact == null) {
+    const globalReact = readGlobalHostReact();
+    if (globalReact != null) {
+      hostReact = globalReact;
+    }
+  }
   if (hostReact == null) {
     throw new Error(
       "Plugin React host is not installed. Call installReact(hc.react) at the start of activate()."
@@ -12,12 +29,12 @@ function requireHostReact() {
   return hostReact;
 }
 
-// node_modules/.pnpm/@harborclient+sdk@0.4.3_react@19.2.7/node_modules/@harborclient/sdk/dist/runtime/index.js
+// ../harborclient-sdk/dist/runtime/index.js
 function installReact(react) {
   setHostReact(react);
 }
 
-// node_modules/.pnpm/@harborclient+sdk@0.4.3_react@19.2.7/node_modules/@harborclient/sdk/dist/runtime/react.js
+// ../harborclient-sdk/dist/runtime/react.js
 function hook(name) {
   const react = requireHostReact();
   const fn = react[name];
@@ -35,8 +52,79 @@ function useEffect(effect, deps) {
 function useCallback(callback, deps) {
   return hook("useCallback")(callback, deps);
 }
+function useMemo(factory, deps) {
+  return hook("useMemo")(factory, deps);
+}
+function useRef(initialValue) {
+  return hook("useRef")(initialValue);
+}
+function useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot) {
+  return hook("useSyncExternalStore")(subscribe, getSnapshot, getServerSnapshot);
+}
+function forwardRef(render) {
+  let forwarded = null;
+  function LazyForwardRef(props, ref) {
+    const react = requireHostReact();
+    if (forwarded === null) {
+      forwarded = react.forwardRef(render);
+    }
+    return react.createElement(forwarded, { ...props, ref });
+  }
+  const displayName = render.displayName ?? render.name ?? "Component";
+  LazyForwardRef.displayName = `ForwardRef(${displayName})`;
+  return LazyForwardRef;
+}
+function useImperativeHandle(ref, create, deps) {
+  return hook("useImperativeHandle")(ref, create, deps);
+}
+function cloneElement(element, props, ...children) {
+  return hook("cloneElement")(element, props, ...children);
+}
+function isValidElement(element) {
+  return hook("isValidElement")(element);
+}
+function createContext(defaultValue) {
+  return hook("createContext")(defaultValue);
+}
+function useContext(context) {
+  return hook("useContext")(context);
+}
+function useId() {
+  return hook("useId")();
+}
+function useLayoutEffect(effect, deps) {
+  return hook("useLayoutEffect")(effect, deps);
+}
+function createElement(type, props, ...children) {
+  return hook("createElement")(type, props, ...children);
+}
+var reactNamespace = {
+  useState,
+  useEffect,
+  useCallback,
+  useMemo,
+  useRef,
+  useSyncExternalStore,
+  forwardRef,
+  useImperativeHandle,
+  cloneElement,
+  isValidElement,
+  createContext,
+  useContext,
+  useId,
+  useLayoutEffect,
+  createElement
+};
+var defaultExport = new Proxy(reactNamespace, {
+  get(target, prop, receiver) {
+    if (prop in target) {
+      return Reflect.get(target, prop, receiver);
+    }
+    return requireHostReact()[prop];
+  }
+});
 
-// node_modules/.pnpm/@harborclient+sdk@0.4.3_react@19.2.7/node_modules/@harborclient/sdk/dist/runtime/jsx-runtime.js
+// ../harborclient-sdk/dist/runtime/jsx-runtime.js
 var Fragment = Symbol.for("@harborclient/sdk.Fragment");
 function build(type, props, key) {
   const react = requireHostReact();

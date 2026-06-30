@@ -3,6 +3,9 @@ import type {
   PluginHttpRequest,
   PluginHttpResponse,
 } from "@harborclient/sdk/main";
+import { createLogger } from "@harborclient/sdk/runtime-utils";
+
+const logger = createLogger("skeleton");
 
 /**
  * Activates the main-process half: logs completed HTTP exchanges to the terminal.
@@ -13,9 +16,7 @@ export function activate(hc: MainPluginContext): void {
   hc.subscriptions.push(
     hc.http.onAfterSend(
       (request: PluginHttpRequest, response: PluginHttpResponse) => {
-        console.log(
-          `[skeleton] ${response.status} ${request.method} ${request.url}`
-        );
+        logger.info(`${response.status} ${request.method} ${request.url}`);
       }
     )
   );
